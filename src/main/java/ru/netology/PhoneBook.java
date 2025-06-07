@@ -10,10 +10,22 @@ public class PhoneBook {
         if(name ==null || number ==null){
             return 0;
         }
-        if( !phoneBook.containsValue(number)){
+        if( !phoneBook.containsKey(name)){
             phoneBook.put(name, number);
             return 1;
         }
         return 0;
+    }
+
+    public String findByNumber(String number){
+        if(!phoneBook.isEmpty()) {
+            return phoneBook.
+                    entrySet().
+                    stream().
+                    filter(entry -> phoneBook.containsValue(number)).
+                    map(Map.Entry::getKey).toString();
+        }
+        return null;
+
     }
 }

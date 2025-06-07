@@ -30,21 +30,19 @@ Actual   :0
 <Click to see difference>
 .....
 ```
-Второй тест должен проверить на уникальность добавляемой записи
+Второй тест должен проверить на уникальность имени добавляемой записи
 ```java
-    public void testAddPhoneBook_Repetition(){
+        @Test
+    public void testAddPhoneBookRepetition() {
         String name = "test";
         String number = "+79999999999";
         String name2 = "test";
-        String number2 = "+79999999999";
-        PhoneBook phoneBook = new PhoneBook();
+        String number2 = "+79999999998";
         assertEquals(1, phoneBook.add(name, number));
-        assertEquals(1, phoneBook.add(name2, number2));
-    }
+        assertNotEquals(1, phoneBook.add(name2, number2));
+}
 ```
-
-Нужно два сравнения, так как первый должен вернуть что запись добавлена, а второй должен вернуть 0 так как добавлять нечего
-результат
+Переделал, так как второй раз добавления нового контакта должен вернуть 0 и чтобы проверить что добавление не произошло, то делаем `assertNotEquals`
 ```bash
 org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
 Expected :1
@@ -57,14 +55,47 @@ Actual   :0
         if(name ==null || number ==null){
             return 0;
         }
-        if( !phoneBook.containsValue(number)){
+        if( !phoneBook.containsKey(name)){
             phoneBook.put(name, number);
             return 1;
         }
         return 0;
     }
 ```
-Проверяем на вход не пустые значения, если они не пусты, то ищем уникальный номер, если его нет в нашей Map то добавляем новый контакт.
+Проверяем на вход не пустые значения, если они не пусты, то ищем уникальный контакт, если его нет в нашей Map то добавляем новый контакт.
 
 Результат, тесты зеленные.
 ![img.png](img.png)
+
+2) Реализуем тестирование второго метода из класса PhoneBook, основные описание поведения метода
+   findByNumber — найти имя по номеру без полного перебора;
+```java
+    @BeforeEach
+    void setUp() {
+        String name = "test";
+        String number = "+79999999998";
+        String name2 = "test2";
+        String number2 = "+79999999999";
+
+        phoneBook.add(name, number);
+        phoneBook.add(name2, number2);
+    }
+
+    @Test
+    public void findByNumber() {
+        String numberTest = "+7999999999";
+        assertEquals("test2",phoneBook.findByNumber(numberTest));
+    }
+```
+Результат теста красный,
+```bash
+org.opentest4j.AssertionFailedError: 
+Expected :test2
+Actual   :null
+```
+
+Для тестирования данного метода, мы сначала добавляем тестовые данные, так как Map в начале пустой и потом ищём необходимый контакт.
+Реализация данного метода:
+```java
+
+```
