@@ -50,3 +50,21 @@ org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
 Expected :1
 Actual   :0
 ```
+
+Реализация метода `add`
+```java
+   public int add(String name, String number){
+        if(name ==null || number ==null){
+            return 0;
+        }
+        if( !phoneBook.containsValue(number)){
+            phoneBook.put(name, number);
+            return 1;
+        }
+        return 0;
+    }
+```
+Проверяем на вход не пустые значения, если они не пусты, то ищем уникальный номер, если его нет в нашей Map то добавляем новый контакт.
+
+Результат, тесты зеленные.
+![img.png](img.png)
