@@ -153,3 +153,35 @@ assertEquals("+79999999999", phoneBook.findByName("test2") );
         assertEquals(sortName, phoneBook.printAllNames());
     }
 ```
+
+Да забыл добавить в коммит данные с которыми я буду сверять, вернулся пустой сет
+```java
+ public void testPrintAllNames(){
+        phoneBook.add(testName1, testNumber1);
+        phoneBook.add(testName2, testNumber2);
+        List<String> sortName = new ArrayList<>();
+        sortName.add(testName1);
+        sortName.add(testName2);
+        Collections.sort(sortName);
+        assertEquals(sortName, phoneBook.printAllNames());
+    }
+```
+Результат
+```bash
+org.opentest4j.AssertionFailedError: expected: <[Test2, User]> but was: <null>
+Expected :[Test2, User]
+Actual   :null
+<Click to see difference>
+
+```
+Итоговый метод, который возвращает отсортированный список всех абонентов
+```java
+
+    public List<String> printAllNames(){
+        List<String> l = new ArrayList<String>(phoneBook.keySet());
+        Collections.sort(l);
+        return l;
+    }
+
+```
+![img_2.png](img_2.png)

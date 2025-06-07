@@ -45,6 +45,8 @@ public class PhoneBookTest {
 
     @Test
     public void testPrintAllNames(){
+        phoneBook.add(testName1, testNumber1);
+        phoneBook.add(testName2, testNumber2);
         List<String> sortName = new ArrayList<>();
         sortName.add(testName1);
         sortName.add(testName2);
