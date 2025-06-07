@@ -87,6 +87,18 @@ Actual   :0
         assertEquals("test2",phoneBook.findByNumber(numberTest));
     }
 ```
+Можно так переписать
+```java
+    @Before
+    public void setUp() {
+        phoneBook.add(testName1, testNumber1);
+        phoneBook.add(testName2, testNumber2);
+    }
+    @Test
+    public void findByNumber() {
+        assertEquals("test2",phoneBook.findByNumber("+79999999999"));
+    }
+```
 Результат теста красный,
 ```bash
 org.opentest4j.AssertionFailedError: 
@@ -97,5 +109,19 @@ Actual   :null
 Для тестирования данного метода, мы сначала добавляем тестовые данные, так как Map в начале пустой и потом ищём необходимый контакт.
 Реализация данного метода:
 ```java
+  public String findByNumber(String number){
+        if(!phoneBook.isEmpty()) {
+            return phoneBook.
+                    entrySet().
+                    stream().
+                    filter(entry -> number.equals(entry.getValue())).
+                    map(Map.Entry::getKey).
+                    findFirst().
+                    get();
+        }
+        return null;
 
+    }
 ```
+![img_1.png](img_1.png)
+Результат тест зеленый

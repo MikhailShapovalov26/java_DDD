@@ -1,5 +1,6 @@
 package ru.netology;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -7,47 +8,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PhoneBookTest {
     PhoneBook phoneBook = new PhoneBook();
+    private final String testName1 = "test1";
+    private final String testNumber1 = "+79999999998";
+    private final String testName2 = "test2";
+    private final String testNumber2 = "+79999999999";
 
     @Test
     public void testAddPhoneBook() {
-        String name = "test";
-        String number = "+79999999999";
-        assertEquals(1, phoneBook.add(name, number));
+        assertEquals(1, phoneBook.add(testName1, testNumber1));
     }
 
     @Test
     public void testAddPhoneBookRepetition() {
-        String name = "test";
-        String number = "+79999999999";
-        String name2 = "test";
-        String number2 = "+79999999998";
-        assertEquals(1, phoneBook.add(name, number));
-        assertNotEquals(1, phoneBook.add(name2, number2));
-    }
-
-    @BeforeEach
-    void setUp() {
-        String name = "test";
-        String number = "+79999999998";
-        String name2 = "test2";
-        String number2 = "+79999999999";
-
-        phoneBook.add(name, number);
-        phoneBook.add(name2, number2);
+        assertEquals(1, phoneBook.add(testName1, testNumber1));
+        assertNotEquals(1, phoneBook.add(testName1, testNumber1));
     }
 
     @Test
     public void findByNumber() {
-        String name = "test";
-        String number = "+79999999998";
-        String name2 = "test2";
-        String number2 = "+79999999999";
-
-        phoneBook.add(name, number);
-        phoneBook.add(name2, number2);
-        String numberTest = "+7999999999";
-        System.out.println(phoneBook.toString());
-        assertEquals("test2",phoneBook.findByNumber(numberTest));
+        phoneBook.add(testName1, testNumber1);
+        phoneBook.add(testName2, testNumber2);
+        assertEquals("test2",phoneBook.findByNumber("+79999999999"));
     }
 
 }

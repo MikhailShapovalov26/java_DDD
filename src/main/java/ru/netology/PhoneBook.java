@@ -22,8 +22,10 @@ public class PhoneBook {
             return phoneBook.
                     entrySet().
                     stream().
-                    filter(entry -> phoneBook.containsValue(number)).
-                    map(Map.Entry::getKey).toString();
+                    filter(entry -> number.equals(entry.getValue())).
+                    map(Map.Entry::getKey).
+                    findFirst().
+                    get();
         }
         return null;
 
