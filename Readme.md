@@ -142,3 +142,14 @@ assertEquals("+79999999999", phoneBook.findByName("test2") );
        return phoneBook.get(name);
     }
 ```
+4) printAllNames — вывести все имена в алфавитном порядке без необходимости проводить сортировку.
+
+```java
+ public void testPrintAllNames(){
+        List<String> sortName = new ArrayList<>();
+        sortName.add(testName1);
+        sortName.add(testName2);
+        Collections.sort(sortName);
+        assertEquals(sortName, phoneBook.printAllNames());
+    }
+```
