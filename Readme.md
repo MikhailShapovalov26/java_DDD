@@ -125,3 +125,13 @@ Actual   :null
 ```
 ![img_1.png](img_1.png)
 Результат тест зеленый
+
+3) findByName — найти номер по имени без полного перебора;
+```java
+@Test
+public void testFindByName(){
+phoneBook.add(testName1, testNumber1);
+phoneBook.add(testName2, testNumber2);
+assertEquals("+79999999999", phoneBook.findByName("test2") );
+}
+```
