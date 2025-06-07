@@ -135,3 +135,10 @@ phoneBook.add(testName2, testNumber2);
 assertEquals("+79999999999", phoneBook.findByName("test2") );
 }
 ```
+
+Реализация 
+```java
+ public String findByName(String name){
+       return phoneBook.get(name);
+    }
+```
