@@ -11,7 +11,7 @@ public class PhoneBook {
         }
         if( !phoneBook.containsKey(name)){
             phoneBook.put(name, number);
-            return 1;
+            return phoneBook.size();
         }
         return 0;
     }
